@@ -1,13 +1,14 @@
 ﻿A jelenlegi elgoritmus idő komplexitása O(n).
 
-Gömb kvadTree:
+Gömb queadtree:
 Mivel csak a vector irányára érdekes, használhatunk polar koordinátákat, a vector hossza nélkül.
-Az így kapott számpárokat kvadTree-be rendezhetjük. 
+A gömb felületét felosztjuk quadtree-re.
+Az így kapott számpárokat quadtree-be rendezhetjük. 
 A tree node-ja így nézne ki:
 
 	class Node(){
 		
-		Int[] _nodeCoords; 
+		float[] _nodeCoords; 
 		bool _branchContainsVector; 
 		Node _firstChild;
 		Node _secondChild;
@@ -23,16 +24,17 @@ A tree node-ja így nézne ki:
 	}
 
 Összehasonlítás:
-Megnézzük, hogy ai inputVector melyik kvad-ba esik. Ha ezt a kvadot reprezentáló node _branchContainsVector igaz, 
+Megnézzük, hogy ai inputVector melyik quad-ba esik. Ha ezt a quadot reprezentáló node _branchContainsVector igaz, 
 végigiterálunk a gyerekein. Amelyik gyerek a legközelebb van inputVectorhoz, és tartalmaz valamelyik gyerekének az ága vectort, 
 annak a gyerekeit hasonlítjuk össze  vectorral, és így tovább, egészen addig, amíg egy leafnode-ig értünk. Ezután a leafnodeban szereplő összes vectort-t hasonlítjuk össze az inputvectorral.
-Ez remélhetőleg kevés vektor van egy leafnode-ban. Ha nem, a fának mélyebbnek kell lennie. A mélység lehet egy előre meghatározott paraméter,
-vagy minden Add() hívásnál egészen addig osztunk egy ágat (azt az ágat, amiben a hanlazhoz adni kívánt vektor van), amíg egy leafNode összesen max 4 vectort tartalmaz.
+Remélhetőleg kevés vektor van egy leafnode-ban. Ha nem, a fának mélyebbnek (és a gridnek részletesebbnek) kell lennie. A mélység lehet egy előre meghatározott paraméter,
+vagy minden Add() hívásnál egészen addig osztunk egy ágat (azt az ágat, amiben a halmazhoz adni kívánt vektor van), amíg egy leafNode összesen max 4 vectort tartalmaz.
 
 Az összehasonlítások időkomplexitása így O(logn).
 
 
 Probléma lehet, hogy a pólusoknál eltorzulnak a quadok:
-Megoldás lehet erre egy Octree grid, ami hasonlóképpen működne, mint a gömb quadtree, de itt a normalizált vectorok
-3 koordinátájával kell dolgozni.
+Megoldás lehet erre ha a gömb quadtree helyett egy 3d octree gridet alkalmazunk, ami hasonlóképpen működne, mint a gömb quadtree, de itt a normalizált vectorok
+3 koordinátájával kell dolgozni. (A vektorok végpontjai kerülnek a grid valamely zónáiba.)
+Idő komplexitása ennek is O(logn).
 

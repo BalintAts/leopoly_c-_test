@@ -23,9 +23,5 @@ namespace LeoVectorSet.Tests
             LeoVectorSet.Vector3 vector = new LeoVectorSet.Vector3(3, 4, 0);
             Assert.AreEqual(vector.Normalized().Magnitude(), 1);
         }
-
-
-
-
     }
 }

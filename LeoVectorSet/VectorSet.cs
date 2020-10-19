@@ -84,7 +84,6 @@ namespace LeoVectorSet
             if (_vectors.Count > 0)
             {
                 result = _vectors[0];
-
                 float currentSmallestAngle = float.PositiveInfinity;
                 for (int i = 0; i < _vectors.Count; i++)
                 {
@@ -127,16 +126,7 @@ namespace LeoVectorSet
 
         public void CopyTo(Vector3[] array, int arrayIndex)
         {
-            Vector3[] vectorArray = array as object[];
-            if (vectorArray!= null)
-            {
-                for (int i = 0; i < _vectors.Count; i++)
-                {
-                    vectorArray[arrayIndex++] = _vectors[i];
-                }
-            }
-
-            throw new ArgumentException("Target array type is not compatible with the type of items in the collection.");
+            throw new NotImplementedException();
         }
 
         void ICollection<Vector3>.Add(Vector3 item) => this.Add(item);
